@@ -1,16 +1,18 @@
 <div>
-    <input type="text" placeholder="Enter Keyword (title,source)" [(ngModel)]="keyword" class="search-container">
-    
-</div>
-
-<div class="articles">
-    
-    <div *ngFor="let item of articles | articleFilter:keyword " class="article">
-        
-        <h1 class="title" id="center">{{item.title}}</h1>
-        <h2 id="center"><b>Source:</b>{{item.source}}</h2>
-        <p id="center"><strong>Date:{{item.PublicationDate}}</strong></p>
-        <p class="Summary"><b>Summary:</b>{{item.Summary}}</p>
+    <input 
+      type="text" 
+      placeholder="Enter Keyword (title, source)" 
+      [(ngModel)]="keyword" 
+      class="search-container"
+    />
+  </div>
+  
+  <div class="articles">
+    <div *ngFor="let item of articles | articleFilter:keyword" class="article">
+      <h1 class="title" id="center">{{item.title}}</h1>
+      <h2 id="center"><b>Source:</b> {{item.source.name}}</h2>
+      <p id="center"><strong>Date: {{item.publishedAt | date}}</strong></p>
+      <p class="summary"><b>Summary:</b> {{item.description}}</p>
     </div>
-
-</div>
+  </div>
+  

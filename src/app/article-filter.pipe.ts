@@ -5,15 +5,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ArticleFilterPipe implements PipeTransform {
 
-  transform(articles:any[],keyword:string): any[] {
-    if(!articles || !keyword){
+  transform(articles: any[], keyword: string): any[] {
+    if (!articles || !keyword) {
       return articles;
     }
 
-    keyword=keyword.toLowerCase();
-    return articles.filter(article=>
-      article.title.toLowerCase().includes(keyword)||  article.source.toLowerCase().includes(keyword) ||  article.Summary.toLowerCase().includes(keyword)
+    const lowerKeyword = keyword.toLowerCase();
+
+    return articles.filter(article =>
+      article.title && article.title.toLowerCase().includes(lowerKeyword) ||
+      (article.source && article.source.name && article.source.name.toLowerCase().includes(lowerKeyword)) ||
+      (article.Summary && article.Summary.toLowerCase().includes(lowerKeyword))
     );
   }
-
 }

@@ -6,21 +6,20 @@ import { NewsService } from '../Service/news.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent  implements OnInit{
-  keyword:string='';
-  
-  articles:any[]=[];
-  filteredArticles:any[]=[];
+export class SearchComponent implements OnInit {
+  keyword: string = '';
+  articles: any[] = [];
 
-  constructor(private http:NewsService){}
+  constructor(private newsService: NewsService) {}
 
-
-  ngOnInit():void{
-    this.articles=this.http.getArticles();
-    this.filteredArticles=this.articles;
-console.warn(this.filteredArticles);
-
+  ngOnInit(): void {
+    this.newsService.getNews().subscribe(
+      data => {
+        this.articles = data.articles;  
+      },
+      error => {
+        console.error('Error fetching news:', error);
+      }
+    );
   }
- 
-
 }
